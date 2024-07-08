@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .endpoint {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fake Product Api</h1>
+    <h3>API Documentation</h3>
+    <div class="endpoint">
+        <h2>User Signup</h2>
+        <h3>POST https://product-api-3trd.onrender.com/user/signup</h3>
+        <pre>
+values:
+{
+    "email": "ravi@gmail.com",
+    "password": "admin123"
+}
+
+response 201:
+{
+    "message": "user created ok"
+}
+
+response 409:
+{
+    "message": "Email already in use"
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>User Login</h2>
+        <h3>POST https://product-api-3trd.onrender.com/user/login</h3>
+        <pre>
+values:
+{
+    "email": "ravi@gmail.com",
+    "password": "admin123"
+}
+
+response 200:
+{
+    "message": "ok"
+}
+
+response 401 (wrong password):
+{
+    "message": "wrong password"
+}
+
+response 401 (auth failed):
+{
+    "message": "auth failed"
+}
+        </pre>
+    </div>
+
+    <!--<div class="endpoint">
+        <h2>Delete User</h2>
+        <h3>DELETE https://product-api-3trd.onrender.com/user/delete/id</h3>
+        <pre>
+response 200:
+{
+    "message": "Delete successfully"
+}
+
+response 404:
+{
+    "message": "not found"
+}
+        </pre>
+    </div>-->
+
+    <div class="endpoint">
+        <h2>Get Users</h2>
+        <h3>GET https://product-api-3trd.onrender.com/user</h3>
+        <pre>
+response 200:
+{
+    "count": 6,
+    "message": {
+        "user": [
+            {
+                "id": "65a8cdf2ab4ac165de61aacb",
+                "username": "rahulf@gmail.com"
+            },
+            {
+                "id": "65b0ad3d4dc6569f44ed1380",
+                "username": "rexion@gmail.com"
+            },
+            {
+                "id": "65b0ad584dc6569f44ed1383",
+                "username": "prasath@gmail.com"
+            },
+            {
+                "id": "65b0ad624dc6569f44ed1386",
+                "username": "kumar@gmail.com"
+            },
+            {
+                "id": "65b0ad6a4dc6569f44ed1389",
+                "username": "raja@gmail.com"
+            },
+            {
+                "id": "65b0ad7b4dc6569f44ed138d",
+                "username": "ravi@gmail.com"
+            }
+        ]
+    }
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>Create Order</h2>
+        <h3>POST https://product-api-3trd.onrender.com/order</h3>
+        <pre>
+values:
+{
+    "productId": "product id",
+    "cartId": "cartid",
+    "userId": "userId"
+}
+
+response 201:
+{
+    "message": "order created"
+}
+
+response 500:
+{
+    "message": "Internal server"
+}
+
+response 404:
+{
+    "message": "not found"
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>Get Order</h2>
+        <h3>GET https://product-api-3trd.onrender.com/order/orderid</h3>
+        <pre>
+response 200:
+{
+    "cartid": "65b0ac4db9eb735e0d98bd24",
+    "userid": {
+        "_id": "65a8cdf2ab4ac165de61aacb",
+        "email": "rahulf@gmail.com"
+    },
+    "data": {
+        "order_Details": {
+            "product": {
+                "productId": {
+                    "_id": "659fb8dd96a7ea9752949a26",
+                    "name": "dragon",
+                    "category": "rare",
+                    "price": 5000
+                },
+                "Method": "GET",
+                "Url": "https://product-api-3trd.onrender.com/product/productid/659fb8dd96a7ea9752949a26"
+            },
+            "cart": {
+                "cartId": {
+                    "_id": "65a7d9a5a88a7e8e33ba39c2",
+                    "quantity": 7
+                }
+            },
+            "createdAt": "2024-01-24T06:21:01.728Z"
+        },
+        "request": {
+            "Method": "GET",
+            "url": "https://localhost:4000/order"
+        }
+    }
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>Delete Order</h2>
+        <h3>DELETE https://product-api-3trd.onrender.com/order/delete/orderid</h3>
+        <pre>
+response 200:
+{
+    "message": "deleted successfully"
+}
+
+response 404:
+{
+    "message": "Not found"
+}
+
+response 500:
+{
+    "message": "internal server error"
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>Product API</h2>
+        <h3>GET https://product-api-3trd.onrender.com/product/</h3>
+        <pre>
+response 200: return all products
+        </pre>
+
+        <h3>POST https://product-api-3trd.onrender.com/product/</h3>
+        <pre>
+values:
+{
+    "name": "",
+    "description": "",
+    "price": "",
+    "discount_price": "",
+    "category": ""
+}
+
+response 200:
+{
+    "message": "successfully"
+}
+
+response 400:
+{
+    "message": "internal server error"
+}
+        </pre>
+
+        <h3>GET https://product-api-3trd.onrender.com/product/productid/id</h3>
+        <h4>Example</h4>
+        <h5>https://product-api-3trd.onrender.com/product/productid/659fb8dd96a7ea9752949a26</h5>
+        <pre>
+response:
+{
+    "data": {
+        "product": {
+            "id": "659fb8dd96a7ea9752949a26",
+            "name": "dragon",
+            "description": "it is name test",
+            "category": "rare",
+            "price": 5000,
+            "discounted_price": 200
+        }
+    }
+}
+response 200: return details of products
+response 404: not found
+response 500: internal server error
+        </pre>
+
+        <h3>GET https://product-api-3trd.onrender.com/product/category/categoryname</h3>
+       <h4>Example</h4>
+        <h5>GET https://product-api-3trd.onrender.com/product/category/rare</h5>
+        <pre>
+response:
+{
+    "data": {
+        "products": [
+            {
+                "id": "659fb8dd96a7ea9752949a26",
+                "name": "dragon",
+                "description": "it is name test",
+                "category": "rare",
+                "price": 5000,
+                "discounted_price": 200
+            },
+            {
+                "id": "659fc16919b457f1d72744c9",
+                "name": "kertt",
+                "description": "good",
+                "category": "rare",
+                "price": 210,
+                "discounted_price": 200
+            },
+            {
+                "id": "659fc49a7c9f6db7376a718d",
+                "name": "lertt",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 250
+            },
+            {
+                "id": "659fd45364014093e6146187",
+                "name": "kertt 2002",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 250
+            },
+            {
+                "id": "659fd48564014093e614618b",
+                "name": "111kertt 2002",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 250
+            },
+            {
+                "id": "65a08959f3683d3da36f4b76",
+                "name": "11kertt 2024",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 200
+            }
+        ]
+    }
+}
+
+response 200: return all products that match category
+response 404: not found
+response 500: internal server error
+        </pre>
+
+        <h3>GET https://product-api-3trd.onrender.com/product/name/:name/</h3>
+        <pre>
+response 200: return all products that match name
+
+example:
+https://product-api-3trd.onrender.com/product/name/kertt
+{
+    "data": {
+        "products": [
+            {
+                "id": "659fc16919b457f1d72744c9",
+                "name": "kertt",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 250
+            },
+            {
+                "id": "659fd45364014093e6146187",
+                "name": "kertt 2002",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 250
+            },
+            {
+                "id": "659fd48564014093e614618b",
+                "name": "111kertt 2002",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 250
+            },
+            {
+                "id": "65a08959f3683d3da36f4b76",
+                "name": "11kertt 2024",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 200
+            }
+        ]
+    }
+}
+
+response 404: not found
+response 500: internal server error
+        </pre>
+
+        <h3>GET https://product-api-3trd.onrender.com/product/name/:name/:value</h3>
+        <pre>
+response 200: return all products that match name and value
+
+example:
+https://product-api-3trd.onrender.com/product/name/kertt/250
+{
+    "data": {
+        "products": [
+            {
+                "id": "659fc16919b457f1d72744c9",
+                "name": "kertt",
+                "description": "good",
+                "category": "rare",
+                "price": 210,
+                "discounted_price": 200
+            },
+            {
+                "id": "65a08959f3683d3da36f4b76",
+                "name": "11kertt 2024",
+                "description": "it iskerttgon",
+                "category": "rare",
+                "price": 200
+            }
+        ]
+    }
+}
+
+response 404: not found
+response 500: internal server error
+        </pre>
+
+        <h3>PATCH https://product-api-3trd.onrender.com/product/update/:id/:description/:price/:discounted_price</h3>
+        <pre>
+response 200: return updated details of products
+response 404: not found
+response 500: internal server error
+        </pre>
+
+        <h3>DELETE https://product-api-3trd.onrender.com/product/delete/:productid</h3>
+        <pre>
+response 200:
+{
+    "message": "deleted successfully"
+}
+
+response 404:
+{
+    "message": "Not found"
+}
+
+response 500:
+{
+    "message": "internal server error"
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>Cart API</h2>
+        <h3>GET https://product-api-3trd.onrender.com/cart</h3>
+        <pre>
+response 200:
+{
+    "count": 5,
+    "message": {
+        "cart_product": {
+            "products": [
+                {
+                    "_id": "65a7d78a97c3b0657b09f4ba",
+                    "productdetails": {
+                        "_id": "659fb8dd96a7ea9752949a26",
+                        "name": "dragon",
+                        "description": "it is name test",
+                        "price": 5000
+                    },
+                    "quantity": 7,
+                    "dateandtime": 7,
+                    "request": {
+                        "method": "GET",
+                        "url": "https://localhost:3000/cart/65a7d78a97c3b0657b09f4ba"
+                    }
+                },
+                {
+                    "_id": "65a7d9a5a88a7e8e33ba39c2",
+                    "productdetails": {
+                        "_id": "659fb8dd96a7ea9752949a26",
+                        "name": "dragon",
+                        "description": "it is name test",
+                        "price": 5000
+                    },
+                    "quantity": 7,
+                    "dateandtime": 7,
+                    "request": {
+                        "method": "GET",
+                        "url": "https://localhost:3000/cart/65a7d9a5a88a7e8e33ba39c2"
+                    }
+                },
+                {
+                    "_id": "65a7dedca88a7e8e33ba39c4",
+                    "productdetails": {
+                        "_id": "659fb8dd96a7ea9752949a26",
+                        "name": "dragon",
+                        "description": "it is name test",
+                        "price": 5000
+                    },
+                    "quantity": 3,
+                    "dateandtime": 3,
+                    "request": {
+                        "method": "GET",
+                        "url": "https://localhost:3000/cart/65a7dedca88a7e8e33ba39c4"
+                    }
+                },
+                {
+                    "_id": "65a7e2c0b776b9d9fe4c93a3",
+                    "productdetails": {
+                        "_id": "659fb8dd96a7ea9752949a26",
+                        "name": "dragon",
+                        "description": "it is name test",
+                        "price": 5000
+                    },
+                    "quantity": 8,
+                    "dateandtime": 8,
+                    "request": {
+                        "method": "GET",
+                        "url": "https://localhost:3000/cart/65a7e2c0b776b9d9fe4c93a3"
+                    }
+                },
+                {
+                    "_id": "668bafc164c424d5defa2e44",
+                    "productdetails": {
+                        "_id": "659fc49a7c9f6db7376a718d",
+                        "name": "lertt",
+                        "description": "it iskerttgon",
+                        "price": 250
+                    },
+                    "quantity": 5,
+                    "dateandtime": 5,
+                    "request": {
+                        "method": "GET",
+                        "url": "https://localhost:3000/cart/668bafc164c424d5defa2e44"
+                    }
+                }
+            ]
+        }
+    }
+}
+        </pre>
+
+        <h3>POST https://product-api-3trd.onrender.com/cart</h3>
+        <pre>
+values:
+{
+    "productId": "659fc49a7c9f6db7376a718d",
+    "quantity": "5"
+}
+
+response 200:
+{
+    "message": "Add in Cart",
+    "result": {
+        "Method": "GET",
+        "URL": "https://product-api-3trd.onrender.com/cart/668bafc164c424d5defa2e44"
+    }
+}
+        </pre>
+
+        <h3>GET https://product-api-3trd.onrender.com/cart/668bafc164c424d5defa2e44</h3>
+        <pre>
+response 200:
+{
+    "cartid": "668bafc164c424d5defa2e44",
+    "data": {
+        "cartEntry": {
+            "product": "659fc49a7c9f6db7376a718d",
+            "quantity": 5,
+            "createdAt": "2024-07-08T09:22:09.523Z"
+        },
+        "request": {
+            "Method": "GET",
+            "url": "https://localhost:4000/cart"
+        }
+    }
+}
+        </pre>
+    </div>
+</body>
+</html>
